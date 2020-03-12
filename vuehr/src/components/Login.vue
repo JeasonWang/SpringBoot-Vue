@@ -48,7 +48,7 @@
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.loading = true;
-            axios.post('login',{username: this.loginForm.username,password:this.loginForm.password}).then(
+            axios.post('dologin',{username: this.loginForm.username,password:this.loginForm.password}).then(
               function (res) {
                 console.log(res);
               },function (err) {
