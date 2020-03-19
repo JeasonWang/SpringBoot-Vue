@@ -1,6 +1,6 @@
 package com.wang.myvhr.controller;
 
-import com.wang.myvhr.bean.RespBean;
+import com.wang.myvhr.model.RespBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

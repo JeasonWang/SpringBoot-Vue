@@ -1,31 +1,42 @@
-package com.wang.myvhr.bean;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.wang.myvhr.model;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by sang on 2017/12/28.
- */
 public class Menu implements Serializable {
-    private Long id;
-    private String url;
-    private String path;
-    private Object component;
-    private String name;
-    private String iconCls;
-    private Long parentId;
-    private List<Role> roles;
-    private List<Menu> children;
-    private MenuMeta meta;
+    private Integer id;
 
-    public MenuMeta getMeta() {
+    private String url;
+
+    private String path;
+
+    private String component;
+
+    private String name;
+
+    private String iconCls;
+
+    private Meta meta;
+
+    private Integer parentId;
+
+    private Boolean enabled;
+    private List<Menu> children;
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Meta getMeta() {
         return meta;
     }
 
-    public void setMeta(MenuMeta meta) {
+    public void setMeta(Meta meta) {
         this.meta = meta;
     }
 
@@ -37,15 +48,14 @@ public class Menu implements Serializable {
         this.children = children;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    @JsonIgnore
     public String getUrl() {
         return url;
     }
@@ -62,12 +72,11 @@ public class Menu implements Serializable {
         this.path = path;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-    public Object getComponent() {
+    public String getComponent() {
         return component;
     }
 
-    public void setComponent(Object component) {
+    public void setComponent(String component) {
         this.component = component;
     }
 
@@ -87,21 +96,19 @@ public class Menu implements Serializable {
         this.iconCls = iconCls;
     }
 
-    @JsonIgnore
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
-    @JsonIgnore
-    public List<Role> getRoles() {
-        return roles;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

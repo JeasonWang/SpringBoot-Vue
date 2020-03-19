@@ -1,6 +1,6 @@
 package com.wang.myvhr.common;
 
-import com.wang.myvhr.bean.Hr;
+import com.wang.myvhr.model.Hr;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class HrUtils {
