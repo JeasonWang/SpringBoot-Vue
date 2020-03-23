@@ -7,10 +7,13 @@ import java.util.Objects;
 
 public class Department implements Serializable {
     private Integer id;
-
     private String name;
-
     private Integer parentId;
+    private String depPath;
+    private Boolean enabled;
+    private Boolean isParent;
+    private List<Department> children = new ArrayList<>();
+    private Integer result;
 
     public Department() {
     }
@@ -35,13 +38,7 @@ public class Department implements Serializable {
         return Objects.hash(name);
     }
 
-    private String depPath;
 
-    private Boolean enabled;
-
-    private Boolean isParent;
-    private List<Department> children = new ArrayList<>();
-    private Integer result;
 
     public Integer getResult() {
         return result;

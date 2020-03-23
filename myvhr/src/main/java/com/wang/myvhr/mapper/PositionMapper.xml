@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wang.myvhr.mapper.PositionMapper">
+    <resultMap id="BaseResultMap" type="com.wang.myvhr.model.Position">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="createDate" property="createDate" jdbcType="DATE"/>
+        <result column="enabled" property="enabled" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name , createDate, enabled
+  </sql>
+
+    <select id="getAllPos" resultMap="BaseResultMap">
+        select * from position
+    </select>
+    <delete id="deletePos" parameterType="java.lang.Integer" >
+    delete from position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="addPos" parameterType="com.wang.myvhr.model.Position">
+        insert into position values(#{id},#{name},#{createDate},#{enabled})
+    </insert>
+</mapper>
