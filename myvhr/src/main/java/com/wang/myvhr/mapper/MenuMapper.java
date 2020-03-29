@@ -9,4 +9,5 @@ import java.util.List;
 public interface MenuMapper {
     List<Menu> getAllMenus();
     List<Menu> getMenusByHrId(Integer hrid);
+    List<Integer> getMidsByRid(Integer rid);
 }

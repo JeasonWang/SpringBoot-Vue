@@ -23,4 +23,5 @@ public class PositionService {
         position.setCreateDate(new Date());
         return positionMapper.addPos(position);
     }
+
 }
