@@ -35,6 +35,7 @@
         </if>
         order by hr.id
     </select>
+
     <select id="getHrRolesById" resultType="com.wang.myvhr.model.Role">
     select r.* from role r,hr_role hrr where hrr.`rid`=r.`id` and hrr.`hrid`=#{id}
   </select>

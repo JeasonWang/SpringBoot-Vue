@@ -1,5 +1,6 @@
 package com.wang.myvhr.service;
 
+import com.wang.myvhr.common.HrUtils;
 import com.wang.myvhr.model.Hr;
 import com.wang.myvhr.mapper.HrMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -25,5 +28,9 @@ public class HrService implements UserDetailsService {
         }
         hr.setRoles(hrMapper.getHrRolesById(hr.getId()));
         return hr;
+    }
+
+    public List<Hr> getAllHrs(String keywords) {
+        return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId(),keywords);
     }
 }
