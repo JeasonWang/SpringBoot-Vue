@@ -1,5 +1,8 @@
 package com.wang.myvhr.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.wang.myvhr.common.JsonUtil;
 import com.wang.myvhr.mapper.EmployeeMapper;
 import com.wang.myvhr.model.Employee;
 import com.wang.myvhr.model.MailConstants;
@@ -8,6 +11,8 @@ import com.wang.myvhr.model.RespPageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +26,10 @@ import java.util.UUID;
 public class EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
-//    @Autowired
-//    RabbitTemplate rabbitTemplate;
-//    @Autowired
-//    MailSendLogService mailSendLogService;
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+    @Autowired
+    MailSendLogService mailSendLogService;
     public final static Logger logger = LoggerFactory.getLogger(EmployeeService.class);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
     SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
@@ -42,7 +47,7 @@ public class EmployeeService {
         return bean;
     }
 
-    public Integer addEmp(Employee employee) {
+    public Integer addEmp(Employee employee) throws JsonProcessingException {
         Date beginContract = employee.getBeginContract();
         Date endContract = employee.getEndContract();
         double month = (Double.parseDouble(yearFormat.format(endContract)) - Double.parseDouble(yearFormat.format(beginContract))) * 12 + (Double.parseDouble(monthFormat.format(endContract)) - Double.parseDouble(monthFormat.format(beginContract)));
@@ -50,6 +55,9 @@ public class EmployeeService {
         int result = employeeMapper.insertSelective(employee);
         if (result == 1) {
             Employee emp = employeeMapper.getEmployeeById(employee.getId());
+            logger.info(emp.toString());
+            rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+            rabbitTemplate.convertAndSend("jeason.mail.welcome", emp);
             //生成消息的唯一id
 //            String msgId = UUID.randomUUID().toString();
 //            MailSendLog mailSendLog = new MailSendLog();

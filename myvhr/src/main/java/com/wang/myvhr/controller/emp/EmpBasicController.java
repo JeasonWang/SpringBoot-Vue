@@ -1,5 +1,6 @@
 package com.wang.myvhr.controller.emp;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wang.myvhr.model.*;
 import com.wang.myvhr.service.*;
 import com.wang.myvhr.common.POIUtils;
@@ -34,7 +35,7 @@ public class EmpBasicController {
         return employeeService.getEmployeeByPage(page, size, employee,beginDateScope);
     }
     @PostMapping("/")
-    public RespBean addEmp(@RequestBody Employee employee){
+    public RespBean addEmp(@RequestBody Employee employee) throws JsonProcessingException {
         if (employeeService.addEmp(employee) == 1){
             return RespBean.ok("添加成功");
         }else {
