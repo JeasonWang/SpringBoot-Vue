@@ -60,6 +60,7 @@ public class EmployeeService {
             logger.info(emp.toString());
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
             rabbitTemplate.convertAndSend("jeason.mail.welcome", emp);
+            System.out.println("已发送邮件");
             //生成消息的唯一id
 //            String msgId = UUID.randomUUID().toString();
 //            MailSendLog mailSendLog = new MailSendLog();
