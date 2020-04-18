@@ -29,7 +29,7 @@ axios.interceptors.response.use(success => {
     return;
 })
 
-let base = '/apidata';
+let base = '';
 
 export const postKeyValueRequest = (url, params) => {
     return axios({
