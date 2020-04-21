@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "menus_cache")
+@CacheConfig(cacheNames = "menus_cache1")
 public class MenuService {
     @Autowired
     MenuMapper menuMapper;
